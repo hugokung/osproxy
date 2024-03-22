@@ -2,29 +2,6 @@
 
 `osproxy`是一个使用Go语言开发的对象存储分布式代理(object-storage-distributed-proxy)，可以作为文件存储微服务，文件会在服务中转处理后再对接到对象存储，包括但不限于以下功能：
 
-* 分布式uid及秒传，支持相同文件不同命名
-* 分片读写，大文件上传，merge接口不用等待数据合并，分片上传完直接下载
-* 异步任务，易扩展的event-handler，支持分片合并及其他文件处理任务
-* 统一封装，降低业务接入复杂度，业务侧只需要存储文件uid
-* 代理下载，不直接暴露底层存储厂商及格式
-* 支持集群部署，proxy模块处理不同机器的分片转发
-* 支持Local/MinIO/腾讯COS/阿里OSS等对象存储，易于扩展
-* 支持Docker一键部署
-
-
-
-本项目仅用作学习交流，如果你正在学习Go语言，并且该项目给你的学习带来了一些帮助，欢迎star，欢迎交流。
-
-
-## 目录
-
-| [架构](#架构) | [功能](#功能) | [API](#API文档) | [技术栈](#技术栈) | [更新日志](#更新日志) | [本地](#本地调试) | [单机](#单机部署) | [集群](#集群部署) | [扩展](#扩展存储) | [如何接入](#如何接入osproxy) |  [庖丁解牛](#庖丁解牛) | [grpc实现](#grpc实现) |[讨论群](#讨论群) |
-|:---------:|:---------:|:-------------:|:-----------:|:-------------:|:-----------:|:-----------:|:-----------:|:-----------:|:-------------:|:-----------------:|:-----------------:|:-----------------:|
-
-## 架构
-
-![img.png](image/img.png)
-
 ## 功能
 
 ![img1.png](image/img1.png)
@@ -192,11 +169,11 @@ echo passwd | docker login --username=username --password-stdin
 # 本地构建，version替换成自定义的有效字符，比如v0.1
 docker build -t osproxy:version -f deploy/Dockerfile  .
 
-# 镜像重命名，qinguoyi/object-storage-proxy请替换成你的username/repo
+# 镜像重命名，xxxxx/object-storage-proxy请替换成你的username/repo
 docker tag osproxy:version qinguoyi/object-storage-proxy:version
 
 # 镜像上传
-docker push qinguoyi/object-storage-proxy:tag
+docker push xxxx/object-storage-proxy:tag
 ```
 
 ## 单机部署
@@ -433,26 +410,6 @@ local:
   客户端(web/api) ->>+ osproxy: 文件uid
   osproxy-->>-客户端(web/api) : 加密下载链接
   ```
-## 庖丁解牛
-
-敬请期待...
-
-## grpc实现
-
-
-[grpc+ssl](https://github.com/qinguoyi/osproxy-grpc)
-
-## 讨论群
-* 微信群失效，加我微信，备注osproxy
-
-|    微信群    |     作者微信      |
-|:---------:|:-------------:|
-| ![group](image/group.jpg) | ![author](image/author.jpg)|
-
-
-
-
-
 
 ## License
 
